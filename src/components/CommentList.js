@@ -30,8 +30,10 @@ export default class CommentList extends Component {
     }
 
     _createList () {
+        //!this.props не стоит проверять, он всегда есть
         if (!this.props || !this.props.comments) return ;
         const { comments } = this.props;
+        //в ul не завернул
         return comments.map(item => <li key = {item.id}><Comment item = {item} /></li>)
     }
 
