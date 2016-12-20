@@ -1,18 +1,26 @@
 import React, {PropTypes} from 'react'
 import Article from './Article'
 import Chart from './Chart'
+import accordionToggleOpen from './../decorators/accordionToggleOpen';
 
-export default class ArticleList extends React.Component {
-    state = {
-        openArticleId: null
-    }
+ class ArticleList extends React.Component {
+
+     static propTypes = {
+         articles:       PropTypes.array,
+         openArticleId:  PropTypes.oneOfType([
+             PropTypes.string,
+             PropTypes.number
+         ]),
+         toggleOpenArticle:  PropTypes.func.isRequired
+     }
+
     render() {
         const {articles} = this.props
         const articleElements = articles.map(article =>
             <li key={article.id}>
                 <Article article={article}
-                         isOpen={this.state.openArticleId == article.id}
-                         onClick={this.toggleOpenArticle(article.id)}
+                         isOpen={this.props.openArticleId == article.id}
+                         onClick={this.props.toggleOpenArticle(article.id)}
                 />
             </li>)
         return (
@@ -26,14 +34,9 @@ export default class ArticleList extends React.Component {
             </div>
         )
     }
-
-    toggleOpenArticle = id => ev => {
-        this.setState({
-            openArticleId: id
-        })
-    }
 }
 
-ArticleList.propTypes = {
-    articles: PropTypes.array.isRequired
-}
+/**
+ * ###HT 2.2: Вынести функционал аккордеона в декоратор
+ */
+export default accordionToggleOpen(ArticleList);

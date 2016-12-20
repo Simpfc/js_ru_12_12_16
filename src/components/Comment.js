@@ -8,5 +8,11 @@ function Comment(props) {
         </div>
     )
 }
+Comment.propTypes = {
+    comment: React.PropTypes.shape({
+        text: React.PropTypes.string.isRequired,
+        user: React.PropTypes.string.isRequired
+    })
+}
 
 export default Comment
