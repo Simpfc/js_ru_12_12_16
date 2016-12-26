@@ -6,6 +6,7 @@ class CommentForm extends Component {
 
     state = {
         username: '',
+        //все ок, но email лишний
         email: '',
         comment: ''
     }
