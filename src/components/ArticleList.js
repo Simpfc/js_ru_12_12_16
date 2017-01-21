@@ -39,9 +39,20 @@ ArticleList.propTypes = {
 }
 
 export default connect(
-    (state) => {
+    (store) => {
+        const {articles, filters}   = store;
+        const {selected, dateRange} = filters;
+        const {from, to}            = dateRange;
+
+        const articlesFiltered =  articles.filter( (article) => {
+            console.log ('---', article.date, selected)
+            const published = Date.parse(article.date);
+            return (!selected.length || selected.includes(article.id)) &&
+                (!from || !to || (published > from && published < to))
+        })
+
         return {
-            articles: state.articles
+            articles: articlesFiltered
         }
     }
 )(accordion(ArticleList))

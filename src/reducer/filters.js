@@ -1,12 +1,22 @@
-import { DELETE_ARTICLE } from '../constants'
+import { CHANGE_RANGE, CHANGE_SELECTION} from '../constants'
 
-export default (articlesState = articles, action) => {
+const defaultFilters = {
+    selected: [],
+    dateRange: {
+        from: null,
+        to: null
+    }
+}
+
+export default (filters = defaultFilters, action) => {
     const { type, payload } = action
-
+    //console.log('---', action)
     switch (type) {
-        case DELETE_ARTICLE:
-            return articlesState.filter(article => article.id !== payload.id)
+        case CHANGE_SELECTION:
+            return {...filters , selected: payload.selected};
+        case CHANGE_RANGE:
+            return {...filters , dateRange: payload.dateRange};
     }
 
-    return articlesState
+    return filters
 }
