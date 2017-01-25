@@ -17,7 +17,7 @@ class ArticleList extends React.Component {
     }
 
     render() {
-        const messages = this.context.localize('ua');
+        const messages = this.context.localize(this.props.lang);
 
         const {articles, loading, isOpenItem, toggleOpenItem} = this.props
         const articleElements = articles.map(article =>
@@ -62,7 +62,8 @@ export default connect(
         })
         return {
             articles: filteredArticles,
-            loading: state.articles.loading
+            loading: state.articles.loading,
+            lang: state.lang
         }
     },
     { loadAllArticles }

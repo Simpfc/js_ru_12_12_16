@@ -1,4 +1,5 @@
 import React, { Component, PropTypes } from 'react'
+import { connect } from 'react-redux'
 
 class Menu extends Component {
     static propTypes = {
@@ -11,7 +12,7 @@ class Menu extends Component {
 
     render() {
         //console.log(this.context);
-        const messages = this.context.localize('ua');
+        const messages = this.context.localize(this.props.lang);
         return (
             <div>
                 <h3>{messages.selectPath}</h3>
@@ -23,4 +24,8 @@ class Menu extends Component {
     }
 }
 
-export default Menu
+export  default connect ((store)=> {
+    return {
+        lang: store.lang
+    }
+})(Menu)

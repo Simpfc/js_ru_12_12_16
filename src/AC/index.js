@@ -1,7 +1,15 @@
 import { INCREMENT, DELETE_ARTICLE, ADD_COMMENT, LOAD_ALL_ARTICLES, LOAD_ARTICLE, LOAD_ARTICLE_COMMENTS,
-    LOAD_COMMENTS_FOR_PAGE, START, SUCCESS, FAIL } from '../constants'
+    LOAD_COMMENTS_FOR_PAGE, START, SUCCESS, FAIL, CHANGE_SITE_LANG } from '../constants'
 import $ from 'jquery'
 import history from '../history'
+
+
+export function changeSiteLang(lang) {
+    return {
+        type: CHANGE_SITE_LANG,
+        payload: lang
+    }
+}
 
 export function increment() {
     return {
