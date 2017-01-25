@@ -7,6 +7,7 @@ class Menu extends Component {
     };
 
     static contextTypes = {
+        //тут и в других местах: лучше сделай вукоратор либо компонент-обертку для локализации, чтоб не обращатся кажды раз к контексту, иначе потом тяжело будет что-либо поменять
         localize: PropTypes.func
     }
 
@@ -26,6 +27,7 @@ class Menu extends Component {
 
 export  default connect ((store)=> {
     return {
+        //если ты уже используешь редакс для хранения языка, то лучше и локализацию туда положить, нет смысла разбивать их
         lang: store.lang
     }
 })(Menu)
