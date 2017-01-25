@@ -5,10 +5,16 @@ class Menu extends Component {
 
     };
 
+    static contextTypes = {
+        localize: PropTypes.func
+    }
+
     render() {
+        //console.log(this.context);
+        const messages = this.context.localize('ua');
         return (
             <div>
-                <h3>Select path</h3>
+                <h3>{messages.selectPath}</h3>
                 <ul>
                     {this.props.children}
                 </ul>

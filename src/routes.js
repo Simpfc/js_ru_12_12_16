@@ -10,24 +10,28 @@ import CommentsRoot from './RouteHandlers/CommentsRoot'
 import CommentsPage from './RouteHandlers/CommentsPage'
 import ArticleIndexPage from './RouteHandlers/ArticleIndexPage'
 import ErrorPage from './RouteHandlers/ErrorPage'
+import mess from './localization/index'
+import Localized from './components/Localized/Localized';
 
 export default (
-    <Router history={history}>
-        <Route path="/" component={App}>
-            <IndexRedirect to="/articles" />
-            <Redirect from="/article" to="/articles"/>
-            <Route path="articles" component={ArticleList}>
-                <IndexRoute component={ArticleIndexPage}/>
-                <Route path="/view/:id" components={{article: Article}} />
-                <Route path=":id" components={{article: Article}} />
+    <Localized messages={mess}>
+        <Router history={history}>
+            <Route path="/" component={App}>
+                    <IndexRedirect to="/articles" />
+                    <Redirect from="/article" to="/articles"/>
+                    <Route path="articles" component={ArticleList}>
+                        <IndexRoute component={ArticleIndexPage}/>
+                        <Route path="/view/:id" components={{article: Article}} />
+                        <Route path=":id" components={{article: Article}} />
+                    </Route>
+                    <Route path="filters" component={Filters}/>
+                    <Route path = "comments" component = {CommentsRoot}>
+                        <IndexRedirect to="1"/>
+                        <Route path = ":page" component = {CommentsPage} />
+                    </Route>
+                    <Route path="error" component={ErrorPage}/>
+                    <Route path="*" component={NotFound} />
             </Route>
-            <Route path="filters" component={Filters}/>
-            <Route path = "comments" component = {CommentsRoot}>
-                <IndexRedirect to="1"/>
-                <Route path = ":page" component = {CommentsPage} />
-            </Route>
-            <Route path="error" component={ErrorPage}/>
-            <Route path="*" component={NotFound} />
-        </Route>
-    </Router>
+        </Router>
+    </Localized>
 )

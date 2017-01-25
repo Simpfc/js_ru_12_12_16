@@ -23,14 +23,20 @@ class App extends Component {
         }
     }
 
+    static contextTypes = {
+        localize: PropTypes.func
+    }
+
     render() {
-        console.log('---', 'App')
+        //console.log('---', this.context);
+        const messages = this.context.localize('ua');
+
         return (
             <Provider store = {store}>
                 <div>
-                    <h1>News App</h1>
+                    <h1>{messages.nameApp}</h1>
                     <div>
-                        Input username:
+                        {messages.inputUsername}:
                         <input type="text" value={this.state.username} onChange={this.handleChange}/>
                     </div>
                     <Menu>

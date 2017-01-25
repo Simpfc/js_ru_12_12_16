@@ -12,7 +12,13 @@ class ArticleList extends React.Component {
         this.props.loadAllArticles()
     }
 
+    static contextTypes = {
+        localize: React.PropTypes.func
+    }
+
     render() {
+        const messages = this.context.localize('ua');
+
         const {articles, loading, isOpenItem, toggleOpenItem} = this.props
         const articleElements = articles.map(article =>
             <li key={article.id}>
@@ -21,7 +27,7 @@ class ArticleList extends React.Component {
         const loader = loading && <Loader />
         return (
             <div>
-                <h2>Article List</h2>
+                <h2>{ messages.title }</h2>
                 <ul>
                     {/*some comment*/}
                     {articleElements}
