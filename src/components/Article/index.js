@@ -68,4 +68,4 @@ class Article extends Component {
 
 export default connect((state, props) => ({
     article: state.articles.getIn(['entities', props.id])
-}), { deleteArticle, loadArticleById })(Article)
+}), { deleteArticle, loadArticleById }, null,  {pure: false})(Article)
